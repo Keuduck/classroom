@@ -1,1 +1,409 @@
-한글홈페이지
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이도담 | 디지털시민교육 · AI교육 · 과학교육</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F5F3;
+    --paper-line:#DCE5E0;
+    --ink:#16231F;
+    --ink-soft:#4A5A54;
+    --yellow:#FFE066;
+    --pink:#FF9AB0;
+    --mint:#7FE7C4;
+    --blue:#3E7CFF;
+    --card:#FFFFFF;
+    --shadow: 0 10px 30px rgba(22,35,31,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px),
+      var(--paper);
+    background-size: 28px 28px, 28px 28px, cover;
+    color:var(--ink);
+    font-family:'Noto Sans KR', sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;background:var(--blue);border-radius:50%;display:inline-block;}
+
+  /* highlighter mark */
+  .mark{
+    position:relative;
+    white-space:nowrap;
+    padding:0 .12em;
+  }
+  .mark::before{
+    content:"";
+    position:absolute;
+    left:-2%; right:-2%; bottom:6%; top:18%;
+    background:var(--hl, var(--yellow));
+    transform:rotate(-0.6deg) skewX(-4deg);
+    z-index:-1;
+    border-radius:3px 8px 4px 9px/6px 3px 8px 4px;
+    opacity:.95;
+  }
+  .mark.pink{--hl:var(--pink);}
+  .mark.mint{--hl:var(--mint);}
+
+  /* ===== NAV ===== */
+  header{position:sticky; top:0; z-index:50; padding-top:18px;}
+  .navtabs{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--card);
+    border:2px solid var(--ink);
+    border-radius:16px;
+    padding:10px 10px 10px 18px;
+    box-shadow:var(--shadow);
+  }
+  .brand{
+    font-family:'Gugi', sans-serif;
+    font-size:19px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-badge{
+    width:32px;height:32px;border:2px solid var(--ink); border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--mint);
+    font-family:'JetBrains Mono'; font-weight:700; font-size:14px;
+  }
+  nav.tabs{display:flex; gap:6px;}
+  nav.tabs a{
+    font-size:14.5px; font-weight:600; padding:9px 16px;
+    border-radius:10px;
+    border:2px solid transparent;
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  nav.tabs a:hover{ border-color:var(--ink); background:var(--yellow); transform:translateY(-2px) rotate(-1deg); }
+  .nav-cta{
+    font-size:13.5px; font-weight:700; font-family:'JetBrains Mono';
+    background:var(--ink); color:var(--paper);
+    padding:10px 16px; border-radius:10px; border:2px solid var(--ink);
+    white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--blue); border-color:var(--blue); }
+  @media (max-width:860px){ nav.tabs{display:none;} }
+
+  /* ===== HERO ===== */
+  .hero{ padding:64px 0 70px; display:grid; grid-template-columns:1fr 1.15fr; gap:56px; align-items:center; }
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; padding:40px 0;} }
+
+  .device{
+    position:relative;
+    background:var(--ink);
+    border-radius:20px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  .device:hover{ transform:rotate(0deg); transition:transform .3s ease; }
+  .device-dots{display:flex; gap:6px; margin-bottom:12px; padding-left:4px;}
+  .device-dots span{width:9px;height:9px;border-radius:50%; background:#4A5A54;}
+  .device-screen{
+    background:var(--paper);
+    border-radius:12px;
+    padding:22px;
+    aspect-ratio:4/3.1;
+    position:relative;
+    overflow:hidden;
+  }
+  .screen-grid{
+    position:absolute; inset:0;
+    background-image: radial-gradient(var(--paper-line) 1.2px, transparent 1.2px);
+    background-size:16px 16px;
+    opacity:.7;
+  }
+  .screen-content{position:relative; height:100%; display:flex; flex-direction:column; justify-content:space-between;}
+  .chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip{
+    background:var(--card); border:1.6px solid var(--ink); border-radius:20px;
+    padding:6px 12px; font-size:12px; font-weight:700; font-family:'JetBrains Mono';
+    display:flex; align-items:center; gap:6px;
+  }
+  .chip .dot{width:6px;height:6px;border-radius:50%;}
+  .molecule{ align-self:center; }
+  .shield-tag{
+    align-self:flex-end;
+    background:var(--ink); color:var(--paper);
+    font-family:'JetBrains Mono'; font-size:11.5px; font-weight:700;
+    padding:8px 12px; border-radius:10px 10px 2px 10px;
+  }
+
+  .hero-copy h1{
+    font-family:'Gugi', sans-serif;
+    font-size:clamp(32px, 4.4vw, 52px);
+    line-height:1.35;
+    letter-spacing:-0.01em;
+    margin-bottom:22px;
+  }
+  .hero-copy p.lede{
+    font-size:16.5px; color:var(--ink-soft); max-width:46ch; margin-bottom:30px;
+  }
+  .hero-btnrow{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-weight:700; font-size:14.5px; padding:14px 22px;
+    border-radius:11px; border:2px solid var(--ink);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-solid:hover{ background:var(--blue); border-color:var(--blue); }
+  .btn-outline{ background:var(--card); }
+  .btn-outline:hover{ background:var(--pink); transform:translateY(-2px); }
+
+  /* ===== SECTION LABEL ===== */
+  .section{ padding:64px 0; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-bottom:34px; flex-wrap:wrap;}
+  .section-head h2{ font-family:'Gugi'; font-size:clamp(24px,2.6vw,32px); }
+  .section-head .note{ font-size:13.5px; color:var(--ink-soft); font-family:'JetBrains Mono'; }
+
+  /* ===== FOCUS CARDS ===== */
+  .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:860px){ .cards{grid-template-columns:1fr;} }
+  .card{
+    background:var(--card); border:2px solid var(--ink); border-radius:16px;
+    padding:26px; position:relative; box-shadow:var(--shadow);
+  }
+  .card:nth-child(1){ transform:rotate(-1.3deg); }
+  .card:nth-child(2){ transform:rotate(0.8deg); }
+  .card:nth-child(3){ transform:rotate(-0.6deg); }
+  .card:hover{ transform:rotate(0deg) translateY(-4px); transition:.2s ease; }
+  .tape{
+    position:absolute; top:-12px; left:24px; width:56px; height:22px;
+    background:rgba(255,224,102,0.85);
+    border:1px solid rgba(0,0,0,.08);
+    transform:rotate(-4deg);
+  }
+  .card-icon{
+    width:44px;height:44px;border-radius:10px; border:2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .card h3{ font-size:18.5px; margin-bottom:10px; font-weight:800;}
+  .card p{ font-size:14px; color:var(--ink-soft); }
+  .card .tags{ margin-top:16px; display:flex; gap:6px; flex-wrap:wrap;}
+  .tags span{
+    font-family:'JetBrains Mono'; font-size:11px; font-weight:600;
+    border:1.4px solid var(--ink); border-radius:20px; padding:3px 9px;
+  }
+
+  /* ===== TIMETABLE ===== */
+  .timetable{ border:2px solid var(--ink); border-radius:16px; overflow:hidden; background:var(--card); box-shadow:var(--shadow);}
+  .period{
+    display:grid; grid-template-columns:90px 1fr 140px; gap:18px; align-items:center;
+    padding:18px 24px; border-bottom:2px solid var(--paper-line);
+  }
+  .period:last-child{ border-bottom:none; }
+  .period .num{ font-family:'JetBrains Mono'; font-weight:700; font-size:13px; color:var(--ink-soft); }
+  .period .num b{ display:block; font-size:20px; color:var(--ink); }
+  .period .desc h4{ font-size:15.5px; font-weight:700; margin-bottom:4px;}
+  .period .desc p{ font-size:13.5px; color:var(--ink-soft); }
+  .period .status{ justify-self:end; }
+  .status-badge{
+    font-family:'JetBrains Mono'; font-size:11px; font-weight:700;
+    padding:6px 11px; border-radius:20px; border:1.6px solid var(--ink);
+  }
+  @media (max-width:700px){ .period{grid-template-columns:1fr; gap:8px;} .period .status{justify-self:start;} }
+
+  /* ===== CTA STACK (blog/podcast style buttons) ===== */
+  .cta-stack{ display:flex; flex-direction:column; gap:14px; max-width:640px; margin:0 auto; }
+  .cta-row{
+    display:flex; align-items:center; justify-content:space-between;
+    border:2px solid var(--ink); border-radius:13px; padding:18px 22px;
+    background:var(--card);
+  }
+  .cta-row:hover{ background:var(--mint); transform:translateX(4px); transition:.15s ease; }
+  .cta-row .lbl{ font-weight:800; font-size:15.5px; display:flex; align-items:center; gap:10px;}
+  .cta-row .lbl small{ font-family:'JetBrains Mono'; font-weight:600; font-size:12px; color:var(--ink-soft); display:block;}
+  .cta-row .arrow{ font-family:'JetBrains Mono'; font-weight:700; }
+  .cta-row.solid{ background:var(--ink); color:var(--paper); }
+  .cta-row.solid:hover{ background:var(--blue); border-color:var(--blue); }
+  .cta-row.solid .lbl small{ color:#B9C6C0; }
+
+  /* ===== FOOTER ===== */
+  footer{ padding:50px 0 40px; border-top:2px solid var(--ink); margin-top:20px; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .foot-note{ font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono'; }
+  .foot-links{ display:flex; gap:16px; font-size:13px; font-weight:600; }
+  .foot-links a:hover{ text-decoration:underline; text-decoration-color:var(--blue); text-decoration-thickness:3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="navtabs">
+      <a href="#top" class="brand">
+        <span class="brand-badge">이</span>
+        이도담
+      </a>
+      <nav class="tabs">
+        <a href="#about">소개</a>
+        <a href="#focus">전문분야</a>
+        <a href="#now">진행중</a>
+        <a href="#links">자료 · 문의</a>
+      </nav>
+      <a href="#links" class="nav-cta">강연 문의</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div class="device">
+        <div class="device-dots"><span></span><span></span><span></span></div>
+        <div class="device-screen">
+          <div class="screen-grid"></div>
+          <div class="screen-content">
+            <div class="chip-row">
+              <span class="chip"><span class="dot" style="background:var(--blue)"></span>AI 평가모델</span>
+              <span class="chip"><span class="dot" style="background:var(--mint)"></span>디지털 리터러시</span>
+            </div>
+            <svg class="molecule" width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="45" r="9" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2.4"/>
+              <circle cx="22" cy="20" r="7" fill="var(--pink)" stroke="var(--ink)" stroke-width="2.2"/>
+              <circle cx="98" cy="20" r="7" fill="var(--mint)" stroke="var(--ink)" stroke-width="2.2"/>
+              <circle cx="30" cy="70" r="6.5" fill="#fff" stroke="var(--ink)" stroke-width="2.2"/>
+              <circle cx="90" cy="68" r="6.5" fill="var(--blue)" stroke="var(--ink)" stroke-width="2.2"/>
+              <line x1="60" y1="45" x2="22" y2="20" stroke="var(--ink)" stroke-width="2"/>
+              <line x1="60" y1="45" x2="98" y2="20" stroke="var(--ink)" stroke-width="2"/>
+              <line x1="60" y1="45" x2="30" y2="70" stroke="var(--ink)" stroke-width="2"/>
+              <line x1="60" y1="45" x2="90" y2="68" stroke="var(--ink)" stroke-width="2"/>
+            </svg>
+            <span class="shield-tag">🛡 안심존 운영중</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">경기도 초등교사 · 교육연구가</p>
+        <h1>
+          아이들이 <span class="mark">디지털을 안전하게</span> 쓰고,<br>
+          <span class="mark pink">AI로 배움을 넓히고</span>,<br>
+          <span class="mark mint">과학으로 질문하게</span> 만듭니다.
+        </h1>
+        <p class="lede">
+          교실 안팎에서 디지털 시민교육, AI 기반 학습평가, 과학 프로젝트 수업을 연구하고 나눕니다.
+          경기도교육청 디지털 시민교육 정책실행연구회를 이끌며, 동료 교사 연수와 학교 현장 자료 개발을 함께하고 있습니다.
+        </p>
+        <div class="hero-btnrow">
+          <a href="#focus" class="btn btn-solid">전문분야 보기 →</a>
+          <a href="#links" class="btn btn-outline">자료실 둘러보기</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="focus">
+      <div class="section-head">
+        <h2>전문분야 3가지</h2>
+        <span class="note">FOCUS_AREAS.md</span>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="tape"></div>
+          <div class="card-icon" style="background:var(--mint)">🛡️</div>
+          <h3>디지털 시민교육</h3>
+          <p>필터버블, 선플 캠페인, 디지털 탄소발자국까지 — 학부모·학생을 위한 근거 기반 자료를 만들고, 정책실행연구회를 운영합니다.</p>
+          <div class="tags"><span>연구회 운영</span><span>학부모 자료</span></div>
+        </div>
+        <div class="card">
+          <div class="tape" style="background:rgba(255,154,176,.85)"></div>
+          <div class="card-icon" style="background:var(--pink)">🤖</div>
+          <h3>AI 기반 학습평가</h3>
+          <p>하이러닝 AI 논술형 평가를 현장에 연수하고, 문항반응이론 기반 진단문항과 교과별 분석적 루브릭을 개발합니다.</p>
+          <div class="tags"><span>루브릭 설계</span><span>교사 연수</span></div>
+        </div>
+        <div class="card">
+          <div class="tape" style="background:rgba(255,224,102,.85)"></div>
+          <div class="card-icon" style="background:var(--yellow)">🔬</div>
+          <h3>과학교육 · PBL</h3>
+          <p>경사면과 지렛대 같은 과학 개념을 글쓰기와 연결한 프로젝트 수업을 설계하고, 학생의 성찰적 글쓰기로 평가합니다.</p>
+          <div class="tags"><span>프로젝트 수업</span><span>성찰 평가</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="now">
+      <div class="section-head">
+        <h2>지금 하고 있는 일</h2>
+        <span class="note">2026 · 시간표</span>
+      </div>
+      <div class="timetable">
+        <div class="period">
+          <div class="num">1교시<b>디지털</b></div>
+          <div class="desc"><h4>디지털 시민교육 워크숍 운영</h4><p>경기도 교사 대상 1박 2일 워크숍 · 팀 구성 및 자료 준비</p></div>
+          <div class="status"><span class="status-badge" style="background:var(--mint)">진행중</span></div>
+        </div>
+        <div class="period">
+          <div class="num">2교시<b>AI</b></div>
+          <div class="desc"><h4>하이러닝 AI 평가 연수</h4><p>동료 교사 대상 AI 논술형 평가 도구 활용 연수 설계</p></div>
+          <div class="status"><span class="status-badge" style="background:var(--pink)">준비중</span></div>
+        </div>
+        <div class="period">
+          <div class="num">3교시<b>과학</b></div>
+          <div class="desc"><h4>과학×글쓰기 수업 자료 정리</h4><p>지렛대·경사면 개념을 활용한 학생 글쓰기 사례 발표 준비</p></div>
+          <div class="status"><span class="status-badge" style="background:var(--yellow)">정리중</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="links">
+      <div class="section-head">
+        <h2>자료 · 협업 · 문의</h2>
+        <span class="note">CONNECT.md</span>
+      </div>
+      <div class="cta-stack">
+        <a href="#" class="cta-row solid">
+          <span class="lbl">자료실<small>수업자료 · 연수 슬라이드 다운로드</small></span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#" class="cta-row">
+          <span class="lbl">블로그<small>연구와 수업 기록</small></span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#" class="cta-row">
+          <span class="lbl">협업 제안<small>연구회 · 공동 개발 제안</small></span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#" class="cta-row">
+          <span class="lbl">강연 · 연수 문의<small>학교/기관 대상 연수 요청</small></span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-note">© 2026 이도담. 디지털 시민교육 · AI교육 · 과학교육 연구노트.</span>
+    <div class="foot-links">
+      <a href="#about">개인정보처리방침</a>
+      <a href="#links">문의하기</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
